@@ -1,0 +1,21 @@
+{
+  "name": "delta-producer-dump-file-publisher-service",
+  "version": "0.0.0",
+  "description": "Service that produces and publishes a dump file of the current state of deltas.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lblod/delta-producer-dump-file-publisher.git"
+  },
+  "author": "lblod",
+  "license": "MIT",
+  "dependencies": {
+    "@lblod/mu-auth-sudo": "^0.2.0",
+    "fs-extra": "^10.0.0",
+    "lodash.flatten": "^4.4.0",
+    "path": "^0.12.7"
+  }
+}
