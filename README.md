@@ -33,11 +33,11 @@ It should be configured as such :
     },
     object: {
       type: 'uri',
-      value: 'http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/deltaDumpFileCreation/xxx'
+      value: 'http://redpencil.data.gift/id/jobs/concept/TaskOperation/deltas/deltaDumpFileCreation'
     }
   },
   callback: {
-    url: 'http://delta-producer-dump-file-publisher/produce-dump-file',
+    url: 'http://delta-producer-dump-file-publisher/delta',
     method: 'POST'
   },
   options: {
@@ -59,8 +59,9 @@ Provided [environment variables](https://docs.docker.com/compose/environment-var
 | ----------------------------------- | --------------------------- | --------------------------------------- |
 | `SERVICE_NAME`                      | The name of the service     | `delta-producer-dump-file-publisher`    |
 | `EXPORT_TTL_BATCH_SIZE`             | Size of the batched queries | `1000`                                  |
-| `DUMP_FILE_CREATION_TASK_OPERATION` | Uri of the dump task        | `http://redpencil.data.gift/id/jobs/concept/TaskOperation/deltas/deltaDumpFileCreation` |
 | `FILES_GRAPH`                       | Graph to store the file     | `http://mu.semte.ch/graphs/system/jobs` |
+| `DUMP_FILE_CREATION_TASK_OPERATION` | Uri of the dump task        | `http://redpencil.data.gift/id/jobs/concept/TaskOperation/deltas/deltaDumpFileCreation` |
+| `DUMP_FILE_CREATION_JOB_OPERATION`  | Uri of the dump task's job  |                                         |
 | `GRAPH_TO_DUMP`                     | Graph to dump in file       |                                         |
 | `EXPORT_FILE_BASE_NAME`             | Base name of the dump file  |                                         |
 
