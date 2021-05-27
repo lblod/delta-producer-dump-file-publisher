@@ -4,12 +4,10 @@ import { getScheduledDumpTask, produceDumpFile } from './lib/helpers';
 import { getLatestFile } from './lib/queries';
 import bodyParser from 'body-parser';
 import flatten from 'lodash.flatten';
-import path from 'path';
-import fs from 'fs-extra';
 
-app.use(bodyParser.json({ type: function(req) { return /^application\/json/.test( req.get('content-type') ); } }))
+app.use(bodyParser.json({ type: function(req) { return /^application\/json/.test( req.get('content-type') ); } }));
 
-app.get('/', function(req, res) {
+app.get('/', function(_, res) {
   const message = `Hey there, you have reached ${SERVICE_NAME}! Seems like I'm doing just fine :)`;
   res.send(message);
 });
@@ -35,7 +33,7 @@ app.get('/latest-dump-file', async (req, res) => {
     console.log('No dump file in the database.');
     res.status(404).send();
   }
-  
+
 });
 
 app.use(errorHandler);
