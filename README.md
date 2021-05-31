@@ -98,3 +98,4 @@ delta-producer-dump-file-publisher:
 ## TODO
 - period clean up of deprecated datasets
 - eventually add dcat:Dataset to dcat:Catalog
+- upate logic to remove the need for one instance per cache graph to maintain
