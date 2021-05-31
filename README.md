@@ -99,3 +99,4 @@ delta-producer-dump-file-publisher:
 - period clean up of deprecated datasets
 - eventually add dcat:Dataset to dcat:Catalog
 - upate logic to remove the need for one instance per cache graph to maintain
+- add as a result container a link to the data set uri. So we can click through in jobs dashboard
