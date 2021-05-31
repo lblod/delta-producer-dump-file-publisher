@@ -1,7 +1,7 @@
 import { app, errorHandler } from 'mu';
 import { SERVICE_NAME } from './lib/env';
 import { getScheduledDumpTask, produceDumpFile } from './lib/helpers';
-import { getLatestFile } from './lib/queries';
+import { getLatestFile, storeError } from './lib/queries';
 import bodyParser from 'body-parser';
 import flatten from 'lodash.flatten';
 
@@ -13,15 +13,22 @@ app.get('/', function(_, res) {
 });
 
 app.post('/delta', async function( req, res ) {
-  const delta = req.body;
-  const inserts = flatten(delta.map(changeSet => changeSet.inserts));
-  const task = await getScheduledDumpTask(inserts);
-  if (task) {
-    produceDumpFile(task); // Not awaiting to avoid socket hangup in deltanotifier
-    res.send({message: `Dump file production started`});
-  } else {
-    console.log('Incoming deltas do not contain any busy job, skipping.');
-    res.status(204).send();
+  try {
+    const delta = req.body;
+    const inserts = flatten(delta.map(changeSet => changeSet.inserts));
+    const task = await getScheduledDumpTask(inserts);
+    if (task) {
+      produceDumpFile(task); // Not awaiting to avoid socket hangup in deltanotifier
+      res.send({message: `Dump file production started`});
+    } else {
+      console.log('Incoming deltas do not contain any busy job, skipping.');
+      res.status(204).send();
+    }
+  }
+  catch(e){
+    const msg = `General error with creating dump file: ${e}`;
+    console.error(msg);
+    await storeError(msg);
   }
 });
 
@@ -35,5 +42,6 @@ app.get('/latest-dump-file', async (req, res) => {
   }
 
 });
+
 
 app.use(errorHandler);
