@@ -1,6 +1,6 @@
 {
   "name": "delta-producer-dump-file-publisher-service",
-  "version": "0.2.0-beta.3",
+  "version": "0.2.1",
   "description": "Service that produces and publishes a dump file of the current state of deltas.",
   "main": "app.js",
   "scripts": {
