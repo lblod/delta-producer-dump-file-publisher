@@ -11,16 +11,24 @@ Files are hosted by mu-file.
 Per cache-graph to manage, you will need an instance of the service, suppose here it is related to leidinggevenden.
 To add the service to your `mu.semte.ch` stack, add the following snippet to docker-compose.yml:
 
+#### Add configuration
+A config.json needs to be present under /config/config.json
+```json
+{
+  "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/deltaDumpFileCreation/leidinggevenden" : {
+    "dcatDataSetSubject": "http://data.lblod.info/datasets/delta-producer/dumps/LeidinggevendenCacheGraphDump",
+    "targetGraph": "http://redpencil.data.gift/id/deltas/producer/loket-leidinggevenden-producer",
+    "fileBaseName": "dump-leidinggevenden"
+  }
+}
+```
+
 ```yaml
 services:
   delta-producer-dump-file-publisher-leiddingevenden:
     image: lblod/delta-producer-dump-file-publisher:x.x.x
-    environment:
-      EXPORT_FILE_BASE_NAME: "dump-leidinggevenden"
-      GRAPH_TO_DUMP: "http://redpencil.data.gift/id/deltas/producer/loket-leidinggevenden-producer"
-      DUMP_FILE_CREATION_JOB_OPERATION: "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/cacheGraphDumping/leidinggevenden"
-      DCAT_DATASET_SUBJECT: "http://data.lblod.info/datasets/delta-producer/dumps/LeidinggevendenCacheGraphDump"
     volumes:
+      - ./config/delta-producer/dump-file-publisher:/config
       - ./data/files:/share
 ```
 

@@ -7,6 +7,7 @@ import { STATUS_BUSY, STATUS_SUCCESS, STATUS_FAILED } from './lib/constants';
 import { DatasetManager } from './lib/dataset';
 import bodyParser from 'body-parser';
 import flatten from 'lodash.flatten';
+import jsonConfig from '/config/config.json';
 
 app.use(bodyParser.json({ type: function(req) { return /^application\/json/.test( req.get('content-type') ); } }));
 
@@ -19,14 +20,20 @@ app.post('/delta', async function( req, res ) {
   try {
     const delta = req.body;
     const inserts = flatten(delta.map(changeSet => changeSet.inserts));
-    const task = await getScheduledDumpTask(inserts);
-    if (task) {
-      produceDumpFile(task); // Not awaiting to avoid socket hangup in deltanotifier
-      res.send({message: `Dump file production started`});
+    if(!inserts.length){
+      console.log('No inserts found, skipping.');
+      res.status(204).send();
     }
     else {
-      console.log('Incoming deltas do not contain any busy job, skipping.');
-      res.status(204).send();
+      const task = await getScheduledDumpTask(inserts);
+      if (task && jsonConfig[task.jobOperation]) {
+        produceDumpFile(jsonConfig[task.jobOperation], task.task); // Not awaiting to avoid socket hangup in deltanotifier
+        res.send({message: `Dump file production started`});
+      }
+      else {
+        console.log('Incoming deltas do not contain any busy job, skipping.');
+        res.status(204).send();
+      }
     }
   }
   catch(e){
@@ -36,10 +43,10 @@ app.post('/delta', async function( req, res ) {
   }
 });
 
-async function produceDumpFile(task) {
+async function produceDumpFile(config, task) {
   try {
     console.log(`Generating dump file for task ${task}.`);
-    const manager = new DatasetManager();
+    const manager = new DatasetManager(config.dcatDataSetSubject, config.targetGraph, config.fileBaseName);
     await updateStatus(task, STATUS_BUSY);
     await manager.createDumpFile();
     await updateStatus(task, STATUS_SUCCESS);
