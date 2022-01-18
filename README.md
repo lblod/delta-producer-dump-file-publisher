@@ -108,3 +108,13 @@ delta-producer-dump-file-publisher:
 - eventually add dcat:Dataset to dcat:Catalog
 - upate logic to remove the need for one instance per cache graph to maintain
 - add as a result container a link to the data set uri. So we can click through in jobs dashboard
+
+## Experimental features
+### config.json
+In case the publication graph is residing in a different endpoint as the default database, you can add
+```
+{
+  "publicationGraphEndpoint": "http://different/endpoint"
+}
+```
+All other queries will keep using the default database.
