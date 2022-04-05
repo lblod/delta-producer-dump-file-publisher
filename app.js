@@ -46,7 +46,12 @@ app.post('/delta', async function( req, res ) {
 async function produceDumpFile(config, task) {
   try {
     console.log(`Generating dump file for task ${task}.`);
-    const manager = new DatasetManager(config.dcatDataSetSubject, config.targetGraph, config.fileBaseName, config.publicationGraphEndpoint);
+    const manager = new DatasetManager(config.dcatDataSetSubject,
+                                       config.targetGraph,
+                                       config.fileBaseName,
+                                       config.publicationGraphEndpoint,
+                                       config.targetDcatGraph,
+                                       config.targetFilesGraph);
     await updateStatus(task, STATUS_BUSY);
     await manager.createDumpFile();
     await updateStatus(task, STATUS_SUCCESS);
