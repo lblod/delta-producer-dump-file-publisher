@@ -18,7 +18,9 @@ A config.json needs to be present under /config/config.json
   "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/deltaDumpFileCreation/leidinggevenden" : {
     "dcatDataSetSubject": "http://data.lblod.info/datasets/delta-producer/dumps/LeidinggevendenCacheGraphDump",
     "targetGraph": "http://redpencil.data.gift/id/deltas/producer/loket-leidinggevenden-producer",
-    "fileBaseName": "dump-leidinggevenden"
+    "fileBaseName": "dump-leidinggevenden",
+    "targetDcatGraph": "optional graph where the information of the data set should reside",
+    "targetFilesGraph": "optional graph where the meta data of the ttl should reside"
   }
 }
 ```
@@ -70,8 +72,8 @@ Provided [environment variables](https://docs.docker.com/compose/environment-var
 | `SERVICE_NAME`                      | The name of the service     | `delta-producer-dump-file-publisher`    |
 | `EXPORT_TTL_BATCH_SIZE`             | Size of the batched queries | `1000`                                  |
 | `DUMP_FILE_CREATION_TASK_OPERATION` | Uri of the dump task        | `http://redpencil.data.gift/id/jobs/concept/TaskOperation/deltas/deltaDumpFileCreation` |
-| `FILES_GRAPH`                       | Graph to store the file     | `http://mu.semte.ch/graphs/public` |
-| `DCAT_DATASET_GRAPH`                       | Graph to store the dcat dataset     | `http://mu.semte.ch/graphs/public` |
+| `FILES_GRAPH`                       | Graph to store the file (can be set per job too)     | `http://mu.semte.ch/graphs/public` |
+| `DCAT_DATASET_GRAPH`                       | Graph to store the dcat dataset (can be set per job too)    | `http://mu.semte.ch/graphs/public` |
 | `RELATIVE_FILE_PATH`                       | relative path to store the files under     | `delta-producer-dumps` |
 | `JOBS_GRAPH`                       | graph where the jobs resides     | `http://mu.semte.ch/graphs/system/jobs` |
 | `GRAPH_TO_DUMP`                     | Graph to dump in file       |                                         |
