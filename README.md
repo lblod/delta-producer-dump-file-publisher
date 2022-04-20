@@ -20,7 +20,8 @@ A config.json needs to be present under /config/config.json
     "targetGraph": "http://redpencil.data.gift/id/deltas/producer/loket-leidinggevenden-producer",
     "fileBaseName": "dump-leidinggevenden",
     "targetDcatGraph": "optional graph where the information of the data set should reside",
-    "targetFilesGraph": "optional graph where the meta data of the ttl should reside"
+    "targetFilesGraph": "optional graph where the meta data of the ttl should reside",
+    "compression": "optional, default false. If true, dumps are compressed as *.ttl.gz"
   }
 }
 ```
