@@ -51,7 +51,8 @@ async function produceDumpFile(config, task) {
                                        config.fileBaseName,
                                        config.publicationGraphEndpoint,
                                        config.targetDcatGraph,
-                                       config.targetFilesGraph);
+                                       config.targetFilesGraph,
+                                       config.compression);
     await updateStatus(task, STATUS_BUSY);
     await manager.createDumpFile();
     await updateStatus(task, STATUS_SUCCESS);
