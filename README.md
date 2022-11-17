@@ -80,7 +80,7 @@ Provided [environment variables](https://docs.docker.com/compose/environment-var
 | `EXPORT_FILE_BASE_NAME`             | Base name of the dump file                                            |                                                                                         |
 | `DUMP_FILE_CREATION_JOB_OPERATION`  | Uri of the dump task's job                                            |                                                                                         |
 | `DCAT_DATASET_SUBJECT`              | The dct:subject URI of the dataset                                    |                                                                                         |
-| `CLEAN_UP_OLD_DUMPS`                | Delete older dataset instead of deprecating                           |  `false`                                                                                       |
+
 
 ## API
 
