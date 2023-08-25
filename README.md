@@ -68,19 +68,20 @@ It should be configured as such :
 
 Provided [environment variables](https://docs.docker.com/compose/environment-variables/) by the service. These can be added in within the docker declaration.
 
-| Name                                | Description                                                           | Default                                                                                 |
-| ----------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `SERVICE_NAME`                      | The name of the service                                               | `delta-producer-dump-file-publisher`                                                    |
-| `EXPORT_TTL_BATCH_SIZE`             | Size of the batched queries                                           | `1000`                                                                                  |
-| `DUMP_FILE_CREATION_TASK_OPERATION` | Uri of the dump task                                                  | `http://redpencil.data.gift/id/jobs/concept/TaskOperation/deltas/deltaDumpFileCreation` |
-| `FILES_GRAPH`                       | Graph to store the file (can be set per job too)                      | `http://mu.semte.ch/graphs/public`                                                      |
-| `DCAT_DATASET_GRAPH`                | Graph to store the dcat dataset (can be set per job too)              | `http://mu.semte.ch/graphs/public`                                                      |
-| `RELATIVE_FILE_PATH`                | relative path to store the files under                                | `delta-producer-dumps`                                                                  |
-| `JOBS_GRAPH`                        | graph where the jobs resides                                          | `http://mu.semte.ch/graphs/system/jobs`                                                 |
-| `GRAPH_TO_DUMP`                     | Graph to dump in file                                                 |                                                                                         |
-| `EXPORT_FILE_BASE_NAME`             | Base name of the dump file                                            |                                                                                         |
-| `DUMP_FILE_CREATION_JOB_OPERATION`  | Uri of the dump task's job                                            |                                                                                         |
-| `DCAT_DATASET_SUBJECT`              | The dct:subject URI of the dataset                                    |                                                                                         |
+| Name                                | Description                                                                                                                           | Default                                                                                 |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `SERVICE_NAME`                      | The name of the service                                                                                                               | `delta-producer-dump-file-publisher`                                                    |
+| `EXPORT_TTL_BATCH_SIZE`             | Size of the batched queries                                                                                                           | `1000`                                                                                  |
+| `DUMP_FILE_CREATION_TASK_OPERATION` | Uri of the dump task                                                                                                                  | `http://redpencil.data.gift/id/jobs/concept/TaskOperation/deltas/deltaDumpFileCreation` |
+| `FILES_GRAPH`                       | Graph to store the file (can be set per job too)                                                                                      | `http://mu.semte.ch/graphs/public`                                                      |
+| `DCAT_DATASET_GRAPH`                | Graph to store the dcat dataset (can be set per job too)                                                                              | `http://mu.semte.ch/graphs/public`                                                      |
+| `RELATIVE_FILE_PATH`                | relative path to store the files under                                                                                                | `delta-producer-dumps`                                                                  |
+| `JOBS_GRAPH`                        | graph where the jobs resides                                                                                                          | `http://mu.semte.ch/graphs/system/jobs`                                                 |
+| `GRAPH_TO_DUMP`                     | Graph to dump in file                                                                                                                 |                                                                                         |
+| `EXPORT_FILE_BASE_NAME`             | Base name of the dump file                                                                                                            |                                                                                         |
+| `DUMP_FILE_CREATION_JOB_OPERATION`  | Uri of the dump task's job                                                                                                            |                                                                                         |
+| `DCAT_DATASET_SUBJECT`              | The dct:subject URI of the dataset                                                                                                    |                                                                                         |
+| `MAX_SUBJECT_COUNT`                 | Batch size for the distinct subject query, should be at most the `ResultSetMaxRows` value as configured in the virtuoso configuration | 1000000                                                                                 |
 
 
 ## API
